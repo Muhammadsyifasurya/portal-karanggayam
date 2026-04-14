@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// --- TABEL LU TARUH DI BAWAH SINI ---
+model User {
+  id            String         @id @default(cuid())
+  name          String
+  email         String         @unique
+  announcements Announcement[] 
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  content     String   @db.Text
+  category    String   @default("Umum") // Buat badge: 'Governance', 'Health', dll
+  imageUrl    String?  // Buat nampilin foto pohon atau gedung itu
+  isFeatured  Boolean  @default(false) // Buat nentuin mana yang jadi kartu gede di atas
+  isUrgent    Boolean  @default(false) // Buat label merah 'Urgent Notice'
+  createdAt   DateTime @default(now())
+  
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+}
