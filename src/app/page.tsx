@@ -71,7 +71,7 @@ export default async function Home() {
   return (
     <main className="bg-slate-50 min-h-screen text-slate-900 overflow-x-hidden">
       {/* HERO SECTION */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-40 overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -142,20 +142,86 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* STATS SECTION */}
-      <section className="py-16 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1594834749740-74b3d7ba5cb6?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center opacity-10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            {stats.map((stat, idx) => (
-              <div key={idx} className="text-center p-6">
-                <div className="inline-flex bg-white/10 p-4 rounded-2xl mb-4 backdrop-blur-sm">
-                  <stat.icon className="w-8 h-8 text-emerald-400" />
+      {/* STATS SECTION - MODERN BENTO */}
+      <section className="pt-24 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-slate-900 rounded-[3rem] p-8 md:p-12 lg:p-16 overflow-hidden relative shadow-2xl">
+            {/* Background Elements */}
+            <div className="absolute inset-0 z-0">
+               <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500 rounded-full blur-[100px] opacity-20"></div>
+               <div className="absolute bottom-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1594834749740-74b3d7ba5cb6?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center opacity-[0.03] mix-blend-overlay"></div>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center relative z-10">
+              {/* Left Content */}
+              <div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-6">
+                  <Activity className="w-4 h-4 text-emerald-400" />
+                  <span className="text-xs font-bold tracking-widest uppercase text-emerald-50">Data Terbuka</span>
                 </div>
-                <h4 className="text-4xl font-black text-white tracking-tight mb-2">{stat.value}</h4>
-                <p className="text-slate-300 font-medium tracking-wide uppercase text-sm">{stat.label}</p>
+                <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                  Karanggayam <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Dalam Angka</span>
+                </h2>
+                <p className="text-slate-300 text-lg leading-relaxed mb-8 max-w-md font-light">
+                  Transparansi adalah kunci komitmen kami. Kami menyajikan data kependudukan dan kewilayahan secara terbuka selayaknya *dashboard* modern untuk mendukung pembangunan desa cerdas.
+                </p>
+                <Link href="/statistik" className="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-bold group transition-colors">
+                  Lihat Seluruh Rincian Data 
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
-            ))}
+
+              {/* Right Bento Stats */}
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                {/* Large Stat Card */}
+                <div className="col-span-2 sm:col-span-1 bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-[2rem] hover:bg-white/10 transition-colors group">
+                  <div className="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-10 group-hover:scale-110 transition-transform duration-500">
+                    <Users className="w-6 h-6 text-emerald-400" />
+                  </div>
+                  <p className="text-5xl lg:text-6xl font-black text-white mb-2 tracking-tighter">1,250</p>
+                  <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest">Total Penduduk</p>
+                </div>
+                
+                {/* Medium Stat Cards Stacked */}
+                <div className="col-span-2 sm:col-span-1 flex flex-col gap-4 md:gap-6">
+                  <div className="flex-1 bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[2rem] hover:bg-white/10 transition-colors flex items-center justify-between group">
+                    <div>
+                      <p className="text-4xl font-black text-white mb-1">8</p>
+                      <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Jumlah RT</p>
+                    </div>
+                    <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
+                      <MapPin className="w-5 h-5 text-emerald-400" />
+                    </div>
+                  </div>
+                  
+                  <div className="flex-1 bg-gradient-to-br from-emerald-600 to-teal-700 p-6 rounded-[2rem] border border-emerald-500/50 shadow-[rgba(16,185,129,0.2)_0px_10px_40px_-10px] hover:shadow-[rgba(16,185,129,0.4)_0px_10px_40px_-10px] transition-all flex items-center justify-between group">
+                    <div>
+                      <p className="text-4xl font-black text-white mb-1 tracking-tight">342</p>
+                      <p className="text-xs font-semibold text-emerald-100 uppercase tracking-widest">Kepala Keluarga</p>
+                    </div>
+                    <div className="w-12 h-12 bg-black/10 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
+                      <Landmark className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Wide Bottom Card */}
+                <div className="col-span-2 bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-[2rem] hover:bg-white/10 transition-colors flex items-center gap-6 group">
+                  <div className="w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center shrink-0 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-500">
+                    <Leaf className="w-8 h-8 text-emerald-400" />
+                  </div>
+                  <div>
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <p className="text-4xl lg:text-5xl font-black text-white tracking-tighter">45</p>
+                      <span className="text-emerald-400 font-bold overflow-hidden text-lg">Hektar</span>
+                    </div>
+                    <p className="text-sm font-semibold text-slate-400 uppercase tracking-widest">Luas Wilayah Pengelolaan Total</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
@@ -246,7 +312,7 @@ export default async function Home() {
                 </div>
                 <div className="space-y-4">
                   <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop" alt="Kerajinan" className="rounded-3xl shadow-lg border-4 border-white/10" />
-                  <img src="https://images.unsplash.com/photo-1615810220461-1cbfbc29cd02?q=80&w=600&auto=format&fit=crop" alt="Kuliner" className="rounded-3xl shadow-lg border-4 border-white/10" />
+                  <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format&fit=crop" alt="Kuliner" className="rounded-3xl shadow-lg border-4 border-white/10" />
                 </div>
               </div>
             </div>

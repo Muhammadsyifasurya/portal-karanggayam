@@ -11,11 +11,18 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 // --- TABEL LU TARUH DI BAWAH SINI ---
 model User {
   id            String         @id @default(cuid())
   name          String
   email         String         @unique
+  password      String         @default("123456")
+  role          Role           @default(USER)
   announcements Announcement[] 
 }
 

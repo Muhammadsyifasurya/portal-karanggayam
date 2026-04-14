@@ -5,7 +5,7 @@ import { Announcement } from "@/modules/announcement/types";
 import { AnnouncementPageClient } from "./announcement-page-client";
 import { ContentRecommendation } from "./content-recomendation";
 
-const tabOptions = ["All", "Governance", "Events", "Health"] as const;
+const tabOptions = ["Semua", "Umum", "Pemerintah", "Kegiatan", "Kesehatan"] as const;
 type TabOption = (typeof tabOptions)[number];
 
 interface AnnouncementPageWrapperProps {
@@ -17,13 +17,13 @@ export function AnnouncementPageWrapper({
   initialAnnouncements,
   totalCount,
 }: AnnouncementPageWrapperProps) {
-  const [activeTab, setActiveTab] = useState<TabOption>("All");
+  const [activeTab, setActiveTab] = useState<TabOption>("Semua");
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredAnnouncements = useMemo(() => {
     let filtered = initialAnnouncements;
 
-    if (activeTab !== "All") {
+    if (activeTab !== "Semua") {
       filtered = filtered.filter(
         (announcement) => announcement.category === activeTab,
       );

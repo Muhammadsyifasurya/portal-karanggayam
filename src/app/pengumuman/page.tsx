@@ -8,7 +8,7 @@ export default async function Page() {
   const totalCount = await announcementService.getAnnouncementsCount();
 
   return (
-    <main className="bg-slate-50 text-slate-900">
+    <main className="bg-slate-50 text-slate-900 pt-32">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <AnnouncementPageWrapper
           initialAnnouncements={initialAnnouncements}
