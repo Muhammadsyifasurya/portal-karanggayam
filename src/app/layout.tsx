@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ConditionalNavbar, ConditionalFooter } from "@/components/conditional-layout";
+import { ToastProvider } from "@/components/toast";
 import "../styles/globals.css";
 
 const geistSans = Geist({
@@ -38,9 +39,11 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ConditionalNavbar session={session} />
-        <main className="flex-1">{children}</main>
-        <ConditionalFooter />
+        <ToastProvider>
+          <ConditionalNavbar session={session} />
+          <main className="flex-1">{children}</main>
+          <ConditionalFooter />
+        </ToastProvider>
       </body>
     </html>
   );

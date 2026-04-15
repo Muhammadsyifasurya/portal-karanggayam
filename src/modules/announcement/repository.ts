@@ -24,6 +24,8 @@ export const announcementRepository = {
       isUrgent: item.isUrgent,
       authorId: item.authorId,
       createdAt: item.createdAt.toISOString(),
+      views: item.views,
+      likes: item.likes,
     }));
   },
 
@@ -31,9 +33,12 @@ export const announcementRepository = {
     return await prisma.announcement.count();
   },
 
-  findById: async (id: string): Promise<Announcement | null> => {
+  findById: async (id: string, userId?: string): Promise<Announcement | null> => {
     const data = await prisma.announcement.findUnique({
       where: { id },
+      include: {
+        likedBy: userId ? { where: { userId } } : false,
+      }
     });
 
     if (!data) return null;
@@ -48,6 +53,9 @@ export const announcementRepository = {
       isUrgent: data.isUrgent,
       authorId: data.authorId,
       createdAt: data.createdAt.toISOString(),
+      views: data.views,
+      likes: data.likes,
+      hasLiked: userId && data.likedBy ? data.likedBy.length > 0 : false,
     };
   },
 
@@ -84,6 +92,45 @@ export const announcementRepository = {
       isUrgent: result.isUrgent,
       authorId: result.authorId,
       createdAt: result.createdAt.toISOString(),
+      views: result.views,
+      likes: result.likes,
+    };
+  },
+
+  incrementViews: async (id: string) => {
+    await prisma.announcement.update({
+      where: { id },
+      data: { views: { increment: 1 } },
+    });
+  },
+
+  toggleLike: async (announcementId: string, userId: string): Promise<{ liked: boolean; totalLikes: number }> => {
+    const existingLike = await prisma.announcementLike.findUnique({
+      where: {
+        userId_announcementId: { userId, announcementId },
+      },
+    });
+
+    if (existingLike) {
+      await prisma.$transaction([
+        prisma.announcementLike.delete({ where: { userId_announcementId: { userId, announcementId } } }),
+        prisma.announcement.update({ where: { id: announcementId }, data: { likes: { decrement: 1 } } })
+      ]);
+    } else {
+      await prisma.$transaction([
+        prisma.announcementLike.create({ data: { userId, announcementId } }),
+        prisma.announcement.update({ where: { id: announcementId }, data: { likes: { increment: 1 } } })
+      ]);
+    }
+
+    const updated = await prisma.announcement.findUnique({
+      where: { id: announcementId },
+      select: { likes: true }
+    });
+
+    return {
+      liked: !existingLike,
+      totalLikes: updated?.likes || 0
     };
   },
 };

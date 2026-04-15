@@ -13,8 +13,16 @@ export const announcementService = {
     return await announcementRepository.count();
   },
 
-  getAnnouncementById: async (id: string): Promise<Announcement | null> => {
-    return await announcementRepository.findById(id);
+  getAnnouncementById: async (id: string, userId?: string): Promise<Announcement | null> => {
+    return await announcementRepository.findById(id, userId);
+  },
+
+  incrementViews: async (id: string) => {
+    return await announcementRepository.incrementViews(id);
+  },
+
+  toggleLike: async (announcementId: string, userId: string) => {
+    return await announcementRepository.toggleLike(announcementId, userId);
   },
 
   createAnnouncement: async (

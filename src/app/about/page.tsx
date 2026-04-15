@@ -7,7 +7,12 @@ import {
   MapPin,
   Award,
   ChevronRight,
-  ArrowRight
+  ArrowRight,
+  PieChart,
+  Home,
+  Activity,
+  Briefcase,
+  TrendingUp
 } from "lucide-react";
 
 const team = [
@@ -221,6 +226,174 @@ export default function AboutPage() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* SENSUS & DEMOGRAFI SECTION */}
+      <section className="py-24 bg-white relative overflow-hidden border-b border-slate-100">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] rounded-full bg-linear-to-bl from-emerald-50/80 to-transparent blur-3xl z-0" />
+        <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-[400px] h-[400px] rounded-full bg-linear-to-tr from-slate-100 to-transparent blur-3xl z-0" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row gap-12 items-end mb-16">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold mb-6 border border-emerald-100 shadow-sm">
+                <PieChart className="w-4 h-4" /> Demografi Warga
+              </div>
+              <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
+                Potret <span className="text-emerald-600">Sensus &amp; Demografi</span><br/>Karanggayam.
+              </h2>
+            </div>
+            <div className="md:w-1/3">
+              <p className="text-slate-600 text-lg leading-relaxed border-l-4 border-emerald-500 pl-5">
+                Data terpadu sebaran penduduk yang menjadi fondasi pengambilan kebijakan dan pembangunan berkelanjutan dusun.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
+            {/* Left: Key Metrics */}
+            <div className="lg:col-span-4 flex flex-col gap-6">
+              {/* Total Card */}
+              <div className="bg-slate-900 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-slate-900/20 group">
+                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform duration-700">
+                  <Users className="w-32 h-32" />
+                </div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6">
+                    <Activity className="w-6 h-6" />
+                  </div>
+                  <p className="text-slate-400 font-medium tracking-wide mb-2 uppercase text-xs">Total Penduduk</p>
+                  <div className="flex items-baseline gap-2">
+                    <p className="text-5xl font-black tracking-tighter">1,245</p>
+                    <span className="text-emerald-400 font-bold">Jiwa</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* KK Card */}
+              <div className="bg-emerald-600 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl shadow-emerald-600/20 group">
+                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform duration-700">
+                  <Home className="w-32 h-32" />
+                </div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-2xl bg-white/20 text-white flex items-center justify-center mb-6 border border-white/10">
+                    <Home className="w-6 h-6" />
+                  </div>
+                  <p className="text-emerald-100 font-medium tracking-wide mb-2 uppercase text-xs">Kepala Keluarga (KK)</p>
+                  <div className="flex items-baseline gap-2">
+                    <p className="text-5xl font-black tracking-tighter">382</p>
+                    <span className="text-emerald-200 font-bold">Keluarga</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Detailed Stats */}
+            <div className="lg:col-span-8 bg-slate-50 rounded-[2.5rem] p-8 md:p-10 border border-slate-200 shadow-sm">
+              <div className="grid md:grid-cols-2 gap-12">
+                
+                {/* Gender Split */}
+                <div>
+                  <h3 className="flex items-center gap-2 text-sm font-bold text-slate-800 uppercase tracking-wider mb-6">
+                    <Users className="w-4 h-4 text-emerald-600" /> Rasio Gender
+                  </h3>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <div className="flex justify-between text-sm mb-2 font-medium">
+                        <span className="text-slate-700">Laki-laki</span>
+                        <span className="text-slate-900 font-bold">610 Jiwa (49%)</span>
+                      </div>
+                      <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-slate-800 rounded-full w-[49%]"></div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between text-sm mb-2 font-medium">
+                        <span className="text-slate-700">Perempuan</span>
+                        <span className="text-slate-900 font-bold">635 Jiwa (51%)</span>
+                      </div>
+                      <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-emerald-500 rounded-full w-[51%]"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Age Demographics */}
+                <div>
+                  <h3 className="flex items-center gap-2 text-sm font-bold text-slate-800 uppercase tracking-wider mb-6">
+                    <TrendingUp className="w-4 h-4 text-emerald-600" /> Kelompok Usia
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-3 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-emerald-200 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-8 rounded-full bg-emerald-400"></div>
+                        <div>
+                          <p className="text-xs text-slate-500 font-semibold uppercase">Usia Produktif</p>
+                          <p className="font-bold text-slate-800 text-sm">15 - 64 Tahun</p>
+                        </div>
+                      </div>
+                      <p className="font-black text-slate-900">68%</p>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-3 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-emerald-200 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-8 rounded-full bg-emerald-200"></div>
+                        <div>
+                          <p className="text-xs text-slate-500 font-semibold uppercase">Usia Muda</p>
+                          <p className="font-bold text-slate-800 text-sm">0 - 14 Tahun</p>
+                        </div>
+                      </div>
+                      <p className="font-black text-slate-900">21%</p>
+                    </div>
+
+                    <div className="flex items-center justify-between p-3 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-emerald-200 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-8 rounded-full bg-slate-300"></div>
+                        <div>
+                          <p className="text-xs text-slate-500 font-semibold uppercase">Usia Lanjut</p>
+                          <p className="font-bold text-slate-800 text-sm">&gt; 65 Tahun</p>
+                        </div>
+                      </div>
+                      <p className="font-black text-slate-900">11%</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Occupations */}
+                <div className="md:col-span-2 pt-8 border-t border-slate-200/60 mt-2">
+                  <h3 className="flex items-center gap-2 text-sm font-bold text-slate-800 uppercase tracking-wider mb-6">
+                    <Briefcase className="w-4 h-4 text-emerald-600" /> Mata Pencaharian Utama
+                  </h3>
+                  
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div className="bg-white p-4 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                      <p className="text-3xl font-black text-slate-900 mb-1 tracking-tighter">45<span className="text-lg text-emerald-500">%</span></p>
+                      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide text-balance">Petani / Buruh Tani</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                      <p className="text-3xl font-black text-slate-900 mb-1 tracking-tighter">25<span className="text-lg text-emerald-500">%</span></p>
+                      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide text-balance">Wiraswasta / UMKM</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                      <p className="text-3xl font-black text-slate-900 mb-1 tracking-tighter">15<span className="text-lg text-emerald-500">%</span></p>
+                      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide text-balance">Karyawan Swasta</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                      <p className="text-3xl font-black text-slate-900 mb-1 tracking-tighter">15<span className="text-lg text-emerald-500">%</span></p>
+                      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide text-balance">PNS / Lainnya</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </section>

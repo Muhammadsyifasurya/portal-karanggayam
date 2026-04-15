@@ -16,6 +16,19 @@ enum Role {
   ADMIN
 }
 
+enum TicketStatus {
+  MENUNGGU
+  DIPROSES
+  SELESAI
+  DITOLAK
+}
+
+enum TicketCategory {
+  ADMINISTRASI
+  PENGADUAN
+  UMUM
+}
+
 // --- TABEL LU TARUH DI BAWAH SINI ---
 model User {
   id            String         @id @default(cuid())
@@ -24,6 +37,8 @@ model User {
   password      String         @default("123456")
   role          Role           @default(USER)
   announcements Announcement[] 
+  tickets       Ticket[]
+  likes         AnnouncementLike[]
 }
 
 model Announcement {
@@ -34,8 +49,42 @@ model Announcement {
   imageUrl    String?  // Buat nampilin foto pohon atau gedung itu
   isFeatured  Boolean  @default(false) // Buat nentuin mana yang jadi kartu gede di atas
   isUrgent    Boolean  @default(false) // Buat label merah 'Urgent Notice'
+  views       Int      @default(0)
+  likes       Int      @default(0)
+
   createdAt   DateTime @default(now())
   
   authorId    String
   author      User     @relation(fields: [authorId], references: [id])
+  likedBy     AnnouncementLike[]
+}
+
+model Ticket {
+  id            String         @id @default(cuid())
+  ticketCode    String         @unique // Kode resi (ex: TKT-001)
+  title         String
+  description   String         @db.Text
+  category      TicketCategory @default(UMUM)
+  status        TicketStatus   @default(MENUNGGU)
+  
+  attachmentUrl String?        // URL bukti foto/dokumen
+
+  adminNotes    String?        @db.Text // Pesan balasan dari perangkat desa
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+} 
+
+model AnnouncementLike {
+  userId         String
+  announcementId String
+  createdAt      DateTime @default(now())
+
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+
+  @@id([userId, announcementId])
 }
