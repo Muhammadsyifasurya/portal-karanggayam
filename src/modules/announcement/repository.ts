@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import { Announcement, CreateAnnouncementPayload } from "./types";
-
-const prisma = new PrismaClient();
 
 export const announcementRepository = {
   findAll: async (options?: {

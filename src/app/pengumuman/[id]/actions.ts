@@ -3,9 +3,7 @@
 import { announcementService } from "@/modules/announcement/service";
 import { getSession, clearSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export async function toggleAnnouncementLike(announcementId: string) {
   const session = await getSession();
